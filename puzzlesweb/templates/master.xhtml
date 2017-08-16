@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      py:strip="">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="${response.charset}" />
+    <py:block name="head" />
+    <title>CS@Mines Puzzle Competition</title>
+    <link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,400italic,500,500italic,700' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/bootstrap.min.css')}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/style.css')}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/font-awesome.min.css')}" />
+  </head>
+
+  <body>
+    <aside>
+      <div class="image"></div>
+      <nav>
+        <a class="${'selected' if value_of('page') == 'index' else ''}" href="${tg.url('/')}#introduction">Introduction</a>
+        <a href="${tg.url('/')}#rules">Rules</a>
+        <a href="${tg.url('/')}#puzzles">Puzzles</a>
+        <a class="${'selected' if value_of('page') == 'competitions' else ''}" href="${tg.url('/competitions')}">Previous Competitions</a>
+        <div class="logged-in-sep" py:if="luser">
+          <i class="fa fa-user"></i> ${luser}
+        </div>
+        <a class="${'selected' if request.path.startswith('/login') else ''}" py:if="not luser" href="${tg.url('/login')}">Login using MultiPass</a>
+        <a class="${'selected' if request.path.startswith('/grade') else ''}" py:if="tg.predicates.has_permission('grader')" href="${tg.url('/grade')}">Grade Answers</a>
+        <a class="${'selected' if value_of('page') == 'preview' else ''}" py:if="tg.predicates.has_permission('admin')" href="${tg.url('/competitions/preview')}">Preview Leaderboard</a>
+        <a class="${'selected' if request.path.startswith('/admin') else ''}" py:if="tg.predicates.has_permission('admin')" href="${tg.url('/admin')}">Admin Panel</a>
+        <a py:if="luser" href="${tg.url('/logout_handler')}">Log Out</a>
+      </nav>
+    </aside>
+
+    <article class="${'full-width' if request.path.startswith('/admin') or value_of('full_width') else ''}">
+
+      <!-- Flash messages -->
+      <py:with vars="flash=tg.flash_obj.render('flash', use_js=False)">
+          <div py:if="flash" py:replace="literal(flash)" />
+      </py:with>
+
+      <!-- Main included content -->
+      <py:block name="body" />
+    </article>
+
+      <script src="${tg.url('/js/jquery.js')}"></script>
+      <script src="${tg.url('/js/site.js')}"></script>
+  </body>
+</html>

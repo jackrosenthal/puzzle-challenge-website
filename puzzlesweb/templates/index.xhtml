@@ -1,0 +1,80 @@
+<html py:extends="master.xhtml" py:strip="True">
+    <body py:block="body" py:strip="True">
+      <h1 id="introduction">Puzzle Competition</h1>
+
+      <p>
+      Welcome to the CS@Mines Puzzle Competition! This is a competition
+      intended to challenge your ingenuity in problem solving by solving a
+      series of puzzles.
+      </p>
+
+      <div py:for="c in active">
+        <h3>Active Competition: ${c.name}</h3>
+        <p>
+        <strong>Competition Opened:</strong> ${h.ftime(c.open_time)}<br />
+        <strong>Competition Closes:</strong> ${h.ftime(c.close_time)}
+        <py:if test="c.prize">
+          <br /><strong>Prize:</strong> ${c.prize}
+        </py:if>
+        </p>
+      </div>
+
+      <div py:for="c in upcoming">
+        <h3>Upcoming Competition: ${c.name}</h3>
+        <p>
+        <strong>Competition Opens:</strong> ${h.ftime(c.open_time)}<br />
+        <strong>Competition Closes:</strong> ${h.ftime(c.close_time)}
+        <py:if test="c.prize">
+          <br /><strong>Prize:</strong> ${c.prize}
+        </py:if>
+        </p>
+      </div>
+
+      <h2 id="rules">Rules</h2>
+
+      <ol>
+        <li><strong>You may not receive assistance from others.</strong> The puzzles are intended to be completed by you and only you. You may not ask for assistance from others, regardless of whether they are participating in the competition or not. This includes others on the internet.</li>
+        <li><strong>You may not give assistance to others.</strong> Likewise, we want these puzzles to be done by you.</li>
+        <li><strong>You may use the internet and other resources to your advantage.</strong> We intended that these puzzles would require extra research, so you should take advantage of any resources you can find.</li>
+        <li><strong>You may submit and resubmit until the end of the competition.</strong> If you need to resubmit, only your latest submission is counted. Submissions after the competition deadline will not be counted.</li>
+      </ol>
+
+      <p>
+      You will be ranked by the number of puzzles you correctly solve.
+      Incorrect answers will not be counted against you. Should you tie with
+      someone else, the tie will be broken by the sum of minutes since the
+      beginning of the competition each answer was submitted. If this value is
+      within ±5 minutes of another participant, the ranks will be considered a
+      tie.
+      </p>
+
+      <h2 id="puzzles">Puzzles</h2>
+
+      <py:if test="active">
+        <div py:for="c in active">
+          <h3>${c.name} Competition</h3>
+          <ol class="steps">
+            <li py:for="p in c.puzzles" value="${p.number}">
+            <h3 py:content="p.name" />
+            <p>
+            <py:if test="p.author">
+            <strong>Author:</strong> <a href="${tg.url('/puzzles/by_author/{}'.format(p.author.user_id))}">${p.author}</a><br />
+            </py:if>
+            <a href="${p.download_url}">View Puzzle</a>
+            <py:if test="luser">
+            <br /><a href="${p.submit_url}">Submit Answer</a>
+            </py:if>
+            </p>
+          </li>
+          </ol>
+        </div>
+        <py:if test="not luser">
+        <p>
+        Please <a href="${tg.url('/login')}">login using your MultiPass</a> to submit answers.
+        </p>
+        </py:if>
+      </py:if><py:else>
+      <p>There are currently no active competitions. See <a href="${tg.url('/competitions')}">previous competitions</a> for prior puzzles.</p>
+      </py:else>
+    </body>
+</html>

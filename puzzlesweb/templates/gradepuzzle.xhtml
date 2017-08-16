@@ -1,0 +1,27 @@
+<html py:extends="master.xhtml" py:strip="True">
+    <body py:block="body" py:strip="True">
+      <h1>Grading "${puzzle.name}"</h1>
+
+      <p>
+      <a href="${tg.url('/grade')}">Return to Problem List</a>
+      </p>
+
+      <div py:for="st, q in (('Ungraded Answers', unknown), ('Correct Answers', correct), ('Incorrect Answers', incorrect))">
+        <h2>${st}</h2>
+        <table class="table table-striped table-bordered grade-table">
+          <tr py:for="answer in q">
+            <td>${answer.text}</td>
+            <td class="grade-buttons">
+                <a href="${tg.url('/grade/mark/{}/correct'.format(answer.id))}" class="btn btn-success${' disabled' if q is correct else ''}">
+                  <i class="fa fa-check fa-fw"></i>
+                </a>
+                <a href="${tg.url('/grade/mark/{}/incorrect'.format(answer.id))}" class="btn btn-danger${' disabled' if q is incorrect else ''}">
+                  <i class="fa fa-times fa-fw"></i>
+                </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </body>
+</html>

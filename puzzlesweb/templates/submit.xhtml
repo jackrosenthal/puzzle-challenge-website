@@ -1,0 +1,24 @@
+<html py:extends="master.xhtml" py:strip="True">
+    <body py:block="body" py:strip="True">
+      <h1>Submit Answer for "${puzzle.name}"</h1>
+
+      <div py:if="old" class="alert alert-danger">
+          <strong>Warning!</strong> Your previous answer from
+          ${h.ftime(old.time)} <strong>will be overwritten.</strong> There is
+          no penalty for resubmitting, but only your newest answer will be counted.
+      </div>
+
+      <p>
+      <strong>Please double check you are typing an answer for
+          "${puzzle.name}".</strong> We will not accept correct submissions
+      under the wrong problem.</p>
+
+      <form method="post">
+          <div class="form-group">
+              <input class="form-control" name="answer" placeholder="Your Answer" type="text" />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Answer</button>
+      </form>
+
+    </body>
+</html>

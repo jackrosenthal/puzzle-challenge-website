@@ -1,0 +1,41 @@
+<html py:extends="master.xhtml" py:strip="True">
+    <body py:block="body" py:strip="True">
+      <h1>${competition.name} Leaderboard</h1>
+
+      <ul>
+        <li><a href="${tg.url('/competitions')}">Return to Competitions List</a></li>
+        <li class="legend-link"><a href="#">Show Table Legend</a></li>
+      </ul>
+      <div class="legend panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Legend</h3>
+        </div>
+        <div class="panel-body">
+        <ul>
+          <li>The puzzles are listed by number in the center columns. Click on a number to be taken to the puzzle.</li>
+          <li>The value in the puzzle columns indicates the number of minutes since the beginning of the competition that the
+            answer was submitted.</li>
+          <li>The lack of a value in a puzzle column indicates that either there was no answer submitted or the answer submitted
+            was incorrect.</li>
+          <li>Participants who did not get any correct answers are not shown.</li>
+        </ul>
+        </div>
+      </div>
+
+      <table class="table table-striped table-bordered">
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th py:for="puzz in competition.puzzles">
+            <a href="${tg.url('/puzzles/by_id/{}'.format(puzz.id))}" py:content="puzz.number"></a>
+          </th>
+          <th>Solved</th>
+          <th>Sum of Minutes</th>
+        </tr>
+        <tr py:for="row in rows">
+          <td py:for="itm in row" py:content="itm"></td>
+        </tr>
+      </table>
+
+    </body>
+</html>

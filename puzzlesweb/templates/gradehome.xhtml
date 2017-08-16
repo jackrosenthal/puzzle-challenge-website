@@ -1,0 +1,21 @@
+<html py:extends="master.xhtml" py:strip="True">
+    <body py:block="body" py:strip="True">
+      <h1>Grade Answers</h1>
+
+      <div py:for="c in competitions">
+        <h2 py:content="c.name" />
+        <ul>
+            <li py:for="p in c.puzzles">
+                <?python
+                n = p.count_need_grading()
+                ?>
+                <a href="${tg.url('/grade/puzzle/{}'.format(p.id))}">Puzzle ${p.number}: ${p.name}</a>
+                <py:if test="n">
+                    — <strong>${n} answer${'' if n == 1 else 's'} need${'s' if n == 1 else ''} grading</strong>
+                </py:if>
+            </li>
+        </ul>
+      </div>
+
+    </body>
+</html>

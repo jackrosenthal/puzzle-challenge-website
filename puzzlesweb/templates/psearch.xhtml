@@ -1,0 +1,22 @@
+<html py:extends="master.xhtml" py:strip="True">
+    <body py:block="body" py:strip="True">
+      <h1 py:content="title" />
+
+      <div py:for="p in puzzles">
+        <h3>${p.competition.name} Puzzle ${p.number}: ${p.name}</h3>
+        <p>
+        <py:if test="p.author">
+        <strong>Author:</strong> <a href="${tg.url('/puzzles/by_author/{}'.format(p.author.user_id))}">${p.author}</a><br />
+        </py:if>
+        <a href="${p.download_url}">View Puzzle</a>
+        <py:if test="luser and p.competition.active">
+          <br /><a href="${p.submit_url}">Submit Answer</a>
+        </py:if>
+        <py:if test="p.solution and (tg.predicates.has_permission('admin') or p.competition.closed)">
+          <br /><a href="${p.solution_url}">View Solution</a>
+        </py:if>
+        </p>
+      </div>
+
+    </body>
+</html>
