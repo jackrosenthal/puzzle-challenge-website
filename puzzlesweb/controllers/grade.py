@@ -37,7 +37,7 @@ class GradeAnswersController(BaseController):
 
     @expose('puzzlesweb.templates.gradehome')
     def index(self):
-        competitions = DBSession.query(Competition).order_by(Competition.open_time.desc())
+        competitions = DBSession.query(Competition).order_by(Competition.open_time.desc()).all()
 
         return dict(competitions=competitions)
 
