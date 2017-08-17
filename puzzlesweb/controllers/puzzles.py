@@ -47,7 +47,7 @@ class PuzzlesController(BaseController):
 
         # Requesting a puzzle that has not opened yet? This requires admin permission.
         if (puzzle.competition.open_time > datetime.datetime.now()
-            and not tg.predicates.has_permission('admin')):
+            and not predicates.has_permission('admin')):
             abort(403)
 
         redirect(DepotManager.url_for(puzzle.file.path))
