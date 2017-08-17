@@ -258,7 +258,6 @@ nav a:hover {
 }
 nav a:after {
   content: "";
-  background-color: #263E7B;
   background-image: url(../img/nav-selected-indicator-mask.svg);
   background-position: right;
   background-repeat: no-repeat;

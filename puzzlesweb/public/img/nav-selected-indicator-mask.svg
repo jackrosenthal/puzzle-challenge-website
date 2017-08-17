@@ -1,12 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="24px" height="100px" viewBox="0 0 24 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.4.2 (15857) - http://www.bohemiancoding.com/sketch -->
-    <title>nav-selected-indicator-mask</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="nav-selected-indicator-mask" sketch:type="MSArtboardGroup" fill="#FFFFFF">
-            <path d="M9.43227233e-05,99.9997941 L22.9081598,50.0000001 L0,0 L0,100 L0,0 L31.9999341,0 L31.9999341,99.9997941 L9.43227233e-05,99.9997941 Z" id="Page-1" sketch:type="MSShapeGroup"></path>
-        </g>
+<svg
+   xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="24px"
+   height="100px"
+   viewBox="0 0 24 100"
+   version="1.1"
+   id="svg939"
+   sodipodi:docname="nav-selected-indicator-mask.svg"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06">
+  <metadata
+     id="metadata943">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>nav-selected-indicator-mask</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="3840"
+     inkscape:window-height="2102"
+     id="namedview941"
+     showgrid="false"
+     inkscape:pagecheckerboard="true"
+     inkscape:zoom="12.982481"
+     inkscape:cx="12"
+     inkscape:cy="50"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg939" />
+  <!-- Generator: Sketch 3.4.2 (15857) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title929">nav-selected-indicator-mask</title>
+  <desc
+     id="desc931">Created with Sketch.</desc>
+  <defs
+     id="defs933" />
+  <g
+     id="g937"
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd"
+     sketch:type="MSPage">
+    <g
+       id="nav-selected-indicator-mask"
+       sketch:type="MSArtboardGroup"
+       fill="#FFFFFF">
+      <path
+         id="Page-1"
+         d="M 9.4322723e-5,99.999794 22.90816,50 0,0 V 100 0 H 31.999934 V 99.999794 Z M -1.0348583,0 H 31.999934 V 100 H -1.0348583 Z"
+         style="fill:#263e7b;fill-opacity:1" />
     </g>
+  </g>
 </svg>
