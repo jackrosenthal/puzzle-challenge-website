@@ -27,10 +27,15 @@ class PuzzlesController(BaseController):
 
     def psearch(self, pfilter, title):
         puzzles = DBSession.query(Puzzle)\
-                .filter(Competition.open_time <= datetime.datetime.now())\
+                .join(Puzzle.competition)\
                 .order_by(Competition.open_time.desc(), Puzzle.number)\
-                .filter(pfilter)\
-                .all()
+                .filter(pfilter)
+        
+        # Admins can view puzzles which have not opened yet
+        if not predicates.has_permission('admin'):
+            puzzles = puzzles.filter(Competition.open_time <= datetime.datetime.now())\
+
+        puzzles = puzzles.all()
 
         return dict(page='puzzles', puzzles=puzzles, title=title)
 
