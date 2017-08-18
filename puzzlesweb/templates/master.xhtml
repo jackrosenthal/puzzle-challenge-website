@@ -17,7 +17,7 @@
     <aside>
       <div class="image"></div>
       <nav>
-        <a class="${'selected' if value_of('page') == 'index' else ''}" href="${tg.url('/')}#introduction">Introduction</a>
+        <a class="${'selected' if value_of('page') == 'index' else ''}" href="${tg.url('/')}${'#introduction' if value_of('page') == 'index' else ''}">Introduction</a>
         <a href="${tg.url('/')}#rules">Rules</a>
         <a href="${tg.url('/')}#puzzles">Puzzles</a>
         <a class="${'selected' if value_of('page') == 'competitions' else ''}" href="${tg.url('/competitions')}">Previous Competitions</a>

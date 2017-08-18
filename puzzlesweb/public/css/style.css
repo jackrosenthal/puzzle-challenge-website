@@ -514,7 +514,18 @@ aside .image {
   height: 150px;
   width: 180px;
   margin: 22px 0 0 30px;
-  background-image: url(../img/logo-w.svg);
+  background-image: url(../img/logow.min.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.site-logo {
+  width: 260px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  background-image: url(../img/logo.min.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
