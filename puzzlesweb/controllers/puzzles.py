@@ -33,7 +33,7 @@ class PuzzlesController(BaseController):
         
         # Admins can view puzzles which have not opened yet
         if not predicates.has_permission('admin'):
-            puzzles = puzzles.filter(Competition.open_time <= datetime.datetime.now())\
+            puzzles = puzzles.filter(Competition.open_time <= datetime.datetime.now())
 
         puzzles = puzzles.all()
 
