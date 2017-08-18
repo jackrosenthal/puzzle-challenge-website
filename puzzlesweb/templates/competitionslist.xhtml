@@ -8,7 +8,7 @@
         <strong>Competition Opened:</strong> ${h.ftime(c.open_time)}<br />
         <strong>Competition Closed:</strong> ${h.ftime(c.close_time)}<br />
         <py:if test="c.prize">
-          <strong>Prize:</strong> ${c.prize}<br />
+          <strong>Prize:</strong> ${h.markdown(c.prize, strip_par=True)}<br />
         </py:if>
         <a href="${tg.url('/puzzles/by_competition/{}'.format(c.id))}">View Puzzles</a><br />
         <a href="${tg.url('/competitions/leaderboard/{}'.format(c.id))}">View Leaderboard</a>

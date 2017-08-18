@@ -14,7 +14,7 @@
         <strong>Competition Opened:</strong> ${h.ftime(c.open_time, show_day=True)}<br />
         <strong>Competition Closes:</strong> ${h.ftime(c.close_time, show_day=True)}
         <py:if test="c.prize">
-          <br /><strong>Prize:</strong> ${c.prize}
+          <br /><strong>Prize:</strong> ${h.markdown(c.prize, strip_par=True)}
         </py:if>
         </p>
       </div>
@@ -25,7 +25,7 @@
         <strong>Competition Opens:</strong> ${h.ftime(c.open_time, show_day=True)}<br />
         <strong>Competition Closes:</strong> ${h.ftime(c.close_time, show_day=True)}
         <py:if test="c.prize">
-          <br /><strong>Prize:</strong> ${c.prize}
+          <br /><strong>Prize:</strong> ${h.markdown(c.prize, strip_par=True)}
         </py:if>
         </p>
       </div>
