@@ -21,7 +21,7 @@ def icon(icon_name):
 def ftime(datetime_obj, show_day=False):
     day_fmt = '{0:%A}, ' if show_day else ''
     date_fmt = '{0.day} {0:%B %Y}'
-    time_fmt = '{0:%H}:{0:%M}'
+    time_fmt = '{0:%-I}:{0:%M} {0:%p}'
     if isinstance(datetime_obj, datetime):
         return (day_fmt + date_fmt + ' at ' + time_fmt).format(datetime_obj)
     if isinstance(datetime_obj, date):

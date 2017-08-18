@@ -11,8 +11,8 @@
       <div py:for="c in active">
         <h3>Active Competition: ${c.name}</h3>
         <p>
-        <strong>Competition Opened:</strong> ${h.ftime(c.open_time)}<br />
-        <strong>Competition Closes:</strong> ${h.ftime(c.close_time)}
+        <strong>Competition Opened:</strong> ${h.ftime(c.open_time, show_day=True)}<br />
+        <strong>Competition Closes:</strong> ${h.ftime(c.close_time, show_day=True)}
         <py:if test="c.prize">
           <br /><strong>Prize:</strong> ${c.prize}
         </py:if>
@@ -22,8 +22,8 @@
       <div py:for="c in upcoming">
         <h3>Upcoming Competition: ${c.name}</h3>
         <p>
-        <strong>Competition Opens:</strong> ${h.ftime(c.open_time)}<br />
-        <strong>Competition Closes:</strong> ${h.ftime(c.close_time)}
+        <strong>Competition Opens:</strong> ${h.ftime(c.open_time, show_day=True)}<br />
+        <strong>Competition Closes:</strong> ${h.ftime(c.close_time, show_day=True)}
         <py:if test="c.prize">
           <br /><strong>Prize:</strong> ${c.prize}
         </py:if>
