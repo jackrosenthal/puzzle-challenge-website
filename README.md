@@ -1,4 +1,4 @@
-# CS@Mines Puzzle Competition Website
+# CS@Mines Puzzle Challenge Website
 
 Built on TurboGears 2, this is the website hosted at
 [puzzles.mines.edu](https://puzzles.mines.edu).
