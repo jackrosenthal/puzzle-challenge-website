@@ -79,7 +79,7 @@ class PuzzlesController(BaseController):
         old = DBSession.query(Submission)\
                 .join(Submission.answer)\
                 .join(Answer.puzzle)\
-                .filter(User.user_id == user.user_id)\
+                .filter(Submission.user_id == user.user_id)\
                 .filter(Answer.puzzle_id == puzzle.id)\
                 .order_by(Submission.time.desc())\
                 .first()
