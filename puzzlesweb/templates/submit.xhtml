@@ -3,9 +3,10 @@
       <h1>Submit Answer for "${puzzle.name}"</h1>
 
       <div py:if="old" class="alert alert-danger">
-          <strong>Warning!</strong> Your previous answer from
-          ${h.ftime(old.time)} <strong>will be overwritten.</strong> There is
-          no penalty for resubmitting, but only your newest answer will be counted.
+          <strong>Warning!</strong>
+          Your previous answer of "${old.answer.text}" from ${h.ftime(old.time)}
+          <strong>will be overwritten.</strong> There is no penalty for
+          resubmitting, but only your newest answer will be counted.
       </div>
 
       <p>
