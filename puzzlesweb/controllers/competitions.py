@@ -2,7 +2,7 @@
 """Competitions controller module"""
 
 import datetime
-from tg import expose, redirect, validate, flash, url, request, response, require
+from tg import expose, redirect, validate, flash, url, request, response, require, abort
 from tg import predicates
 from puzzlesweb.lib.helpers import log
 
