@@ -14,7 +14,7 @@ from alembic import op
 import sqlalchemy as sa
 
 def upgrade():
-    op.add_column('tg_user', sa.Column('privacy', sa.Enum('always', 'auth', 'admin'), nullable=False, server_default='always'))
+    op.add_column('tg_user', sa.Column('privacy', sa.Enum('always', 'auth', 'admin', name='PrivacySetting'), nullable=False, server_default='always'))
 
 def downgrade():
     op.drop_column('tg_user', 'privacy')
