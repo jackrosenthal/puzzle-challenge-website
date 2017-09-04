@@ -9,6 +9,7 @@ from puzzlesweb.lib.helpers import log
 from puzzlesweb.lib.base import BaseController
 from puzzlesweb.model import DBSession, Puzzle, User, Competition, Answer, Submission
 from puzzlesweb.model.puzzlecomp import AnswerGrade
+from collections import namedtuple
 
 class CompetitonsController(BaseController):
 
@@ -64,49 +65,53 @@ class CompetitonsController(BaseController):
         # Build the leaderboard!
         # User -> dict of (puzzle -> final and correct submission times for that user)
         subs = {}
-        user_display_name = {}
 
         q = (DBSession
-                .query(User.user_id, User.display_name, Puzzle.id, Answer.grade, Submission.time)
+                .query(User, Puzzle.id, Answer.grade, Submission.time)
                 .filter(Puzzle.competition_id == competition_id)
                 .filter(Answer.puzzle_id == Puzzle.id)
                 .filter(Submission.answer_id == Answer.id)
                 .filter(Submission.user_id == User.user_id)
                 .order_by(Submission.time.asc()))
 
-        for user_id, display_name, puzzle_id, grade, time in q:
-            user_display_name[user_id] = display_name
-            if user_id not in subs.keys():
-                subs[user_id] = {}
+        for u, puzzle_id, grade, time in q:
+            if u not in subs.keys():
+                subs[u] = {}
             if grade == AnswerGrade.correct:
                 # Keep the time
-                subs[user_id][puzzle_id] = time
-            elif puzzle_id in subs[user_id].keys():
+                subs[u][puzzle_id] = time
+            elif puzzle_id in subs[u].keys():
                 # Delete the correct answer
-                del subs[user_id][puzzle_id]
+                del subs[u][puzzle_id]
             # delete the user's entry if they are down to zero now
-            if not subs[user_id]:
-                del subs[user_id]
+            if not subs[u]:
+                del subs[u]
 
         # sum of minutes for each user
         minutes = {}
-        for user_id, prows in subs.items():
-            minutes[user_id] = sum(int((itm - competition.open_time).total_seconds() // 60) for itm in prows.values())
+        for u, prows in subs.items():
+            minutes[u] = sum(int((itm - competition.open_time).total_seconds() // 60) for itm in prows.values())
 
         # build the table rows
-        last_user_id = None
+        LeaderTableRow = namedtuple('LeaderTableRow', 'user, rank, puzzletimes, solved, minutes')
+        last_user = None
         rows = []
-        for user_id, prows in sorted(subs.items(), key=lambda kv: (-len(kv[1]), minutes[kv[0]])):
+        for u, prows in sorted(subs.items(), key=lambda kv: (-len(kv[1]), minutes[kv[0]])):
             # don't adjust rank on peleton finish
-            if not last_user_id or minutes[last_user_id] + 5 < minutes[user_id] or len(subs[user_id]) < len(subs[last_user_id]):
+            if not last_user or minutes[last_user] + 5 < minutes[u] or len(subs[u]) < len(subs[last_user]):
                 rank = len(rows) + 1
             rows.append(
-                (rank, user_display_name[user_id], 
-                *(int((subs[user_id][puzz.id] - competition.open_time).total_seconds() // 60)
-                    if puzz.id in subs[user_id].keys() else ''
-                    for puzz in competition.puzzles),
-                len(prows), minutes[user_id])
+                LeaderTableRow(
+                    user=u,
+                    rank=rank,
+                    puzzletimes=tuple(
+                        int((subs[u][puzz.id] - competition.open_time).total_seconds() // 60)
+                        if puzz.id in subs[u].keys() else ''
+                        for puzz in competition.puzzles),
+                    solved=len(prows),
+                    minutes=minutes[u]
+                )
             )
-            last_user_id = user_id
+            last_user = u
         
         return dict(page=page, competition=competition, rows=rows, full_width=True)

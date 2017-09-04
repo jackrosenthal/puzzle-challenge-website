@@ -23,6 +23,9 @@
       </div>
 
       <table class="table table-striped table-bordered">
+        <?python
+        from puzzlesweb.model.auth import PrivacySetting
+        ?>
         <tr>
           <th>Rank</th>
           <th>Name</th>
@@ -32,8 +35,19 @@
           <th>Solved</th>
           <th>Sum of Minutes</th>
         </tr>
-        <tr py:for="row in rows">
-          <td py:for="itm in row" py:content="itm"></td>
+        <tr py:for="row in rows" class="${'success' if row.user == luser else ''}">
+          <td py:content="row.rank" />
+          <py:if test="row.user.privacy == PrivacySetting.always
+                       or (row.user.privacy == PrivacySetting.auth and tg.predicates.not_anonymous())
+                       or (row.user.privacy == PrivacySetting.admin and tg.predicates.has_permission('admin'))
+                       or row.user == luser">
+              <td py:content="row.user.display_name" />
+          </py:if><py:else>
+              <td><em>Anonymous</em></td>
+          </py:else>
+          <td py:for="itm in row.puzzletimes" py:content="itm" />
+          <td py:content="row.solved" />
+          <td py:content="row.minutes" />
         </tr>
       </table>
 

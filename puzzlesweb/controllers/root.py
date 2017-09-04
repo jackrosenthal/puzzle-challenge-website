@@ -16,6 +16,7 @@ from puzzlesweb.controllers.error import ErrorController
 from puzzlesweb.controllers.puzzles import PuzzlesController
 from puzzlesweb.controllers.grade import GradeAnswersController
 from puzzlesweb.controllers.competitions import CompetitonsController
+from puzzlesweb.controllers.pref import PreferencesController
 
 import datetime
 
@@ -40,6 +41,7 @@ class RootController(BaseController):
     puzzles = PuzzlesController()
     grade = GradeAnswersController()
     competitions = CompetitonsController()
+    pref = PreferencesController()
 
     def _before(self, *args, **kw):
         tmpl_context.project_name = "puzzlesweb"

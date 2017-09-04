@@ -1,0 +1,30 @@
+<html py:extends="master.xhtml" py:strip="True">
+
+<body py:block="body" py:strip="True">
+    <h1>User Preferences</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="display_name">Display Name</label>
+            <input class="form-control" id="display_name" name="display_name" value="${luser.display_name}" type="text" />
+            <p class="help-block">Please use a name you go by in real life.</p>
+        </div>
+        <div class="form-group">
+            <label for="privacy-setting">Leaderboard Privacy Setting</label>
+            <div id="privacy-setting">
+                <div class="radio" py:for="val, desc in (('always', 'Always show my name in the leaderboard'),
+                                                         ('auth', 'Only show my name to authenticated users'),
+                                                         ('admin', 'Only show my name to website admins'))">
+                    <label>
+                        <input type="radio" name="privacy" value="${val}" py:attrs="{'checked': 'checked' if luser.privacy.name == val else None}"/>
+                        ${desc}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Preferences</button>
+    </form>
+
+</body>
+
+</html>

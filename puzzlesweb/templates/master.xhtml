@@ -40,6 +40,7 @@
         <a class="${'selected' if request.path.startswith('/grade') else ''}" py:if="tg.predicates.has_permission('grader')" href="${tg.url('/grade')}">Grade Answers</a>
         <a class="${'selected' if value_of('page') == 'preview' else ''}" py:if="tg.predicates.has_permission('admin')" href="${tg.url('/competitions/preview')}">Preview Leaderboard</a>
         <a class="${'selected' if request.path.startswith('/admin') else ''}" py:if="tg.predicates.has_permission('admin')" href="${tg.url('/admin')}">Admin Panel</a>
+        <a class="${'selected' if value_of('page') == 'pref' else ''}" py:if="tg.predicates.not_anonymous()" href="${tg.url('/pref')}">User Preferences</a>
         <a py:if="luser" href="${tg.url('/logout_handler')}">Log Out</a>
       </nav>
     </aside>

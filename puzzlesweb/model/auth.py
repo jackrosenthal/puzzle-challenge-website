@@ -10,12 +10,13 @@ though.
 """
 import os
 import tg
+import enum
 from datetime import datetime
 from hashlib import sha256
 __all__ = ['User', 'Group', 'Permission']
 
 from sqlalchemy import Table, ForeignKey, Column
-from sqlalchemy.types import Unicode, Integer, DateTime
+from sqlalchemy.types import Unicode, Integer, DateTime, Enum
 from sqlalchemy.orm import relation, synonym, relationship
 from puzzlesweb.lib.mpapi_connector import auth
 from puzzlesweb.model import DeclarativeBase, metadata, DBSession
@@ -73,6 +74,10 @@ class Group(DeclarativeBase):
     def __unicode__(self):
         return self.group_name
 
+class PrivacySetting(enum.Enum):
+    always = 0
+    auth = 1
+    admin = 2
 
 class User(DeclarativeBase):
     """
@@ -90,6 +95,7 @@ class User(DeclarativeBase):
     created = Column(DateTime, default=datetime.now)
     puzzles = relationship('puzzlesweb.model.puzzlecomp.Puzzle', back_populates='author')
     submissions = relationship('puzzlesweb.model.puzzlecomp.Submission', back_populates='user')
+    privacy = Column(Enum(PrivacySetting), nullable=False, default=PrivacySetting.always)
 
     def __repr__(self):
         return '<User: name=%s, display=%s>' % (
