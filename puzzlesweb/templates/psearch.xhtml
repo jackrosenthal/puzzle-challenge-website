@@ -12,7 +12,7 @@
         <py:if test="luser and p.competition.active">
           <br /><a href="${p.submit_url}">Submit Answer</a>
         </py:if>
-        <py:if test="p.solution and (tg.predicates.has_permission('admin') or p.competition.closed)">
+        <py:if test="tg.predicates.has_permission('admin') or p.competition.closed">
           <br /><a href="${p.solution_url}">View Solution</a>
         </py:if>
         </p>

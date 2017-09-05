@@ -2,7 +2,9 @@
     <body py:block="body" py:strip="True">
       <h1>Solution for "${puzzle.name}"</h1>
 
-      ${h.markdown(puzzle.solution)}
+      <div py:if="puzzle.solution" class="solution-text">
+        ${h.markdown(puzzle.solution)}
+      </div>
 
       <h2>Answers Graded As Correct</h2>
       
