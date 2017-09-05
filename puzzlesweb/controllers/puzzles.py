@@ -8,6 +8,9 @@ from depot.manager import DepotManager
 
 from puzzlesweb.lib.base import BaseController
 from puzzlesweb.model import DBSession, Puzzle, User, Competition, Answer, Submission
+from puzzlesweb.model.puzzlecomp import AnswerGrade
+
+from sqlalchemy.orm import subqueryload
 
 class PuzzlesController(BaseController):
 
@@ -58,14 +61,29 @@ class PuzzlesController(BaseController):
                 .filter(Puzzle.id == puzzle_id)\
                 .one()
 
-        if not puzzle.solution:
-            abort(404)
-
         # Requesting a puzzle that has not closed yet? This requires admin permission.
         if not puzzle.competition.closed and not predicates.has_permission('admin'):
             abort(403)
 
-        return dict(page='solution', puzzle=puzzle)
+        # Logged in? let's get their answer to show them.
+        user = request.identity and request.identity.get('user')
+        submission = None
+        if user:
+            submission = DBSession.query(Submission)\
+                    .options(subqueryload(Submission.answer))\
+                    .join(Submission.answer)\
+                    .join(Answer.puzzle)\
+                    .filter(Submission.user_id == user.user_id)\
+                    .filter(Answer.puzzle_id == puzzle.id)\
+                    .order_by(Submission.time.desc())\
+                    .first()
+        
+        correct_answers = DBSession.query(Answer)\
+                    .filter(Answer.puzzle_id == puzzle_id)\
+                    .filter(Answer.grade == AnswerGrade.correct)\
+                    .all()
+
+        return dict(page='solution', puzzle=puzzle, correct_answers=correct_answers, submission=submission)
 
     @expose('puzzlesweb.templates.submit')
     @require(predicates.not_anonymous())

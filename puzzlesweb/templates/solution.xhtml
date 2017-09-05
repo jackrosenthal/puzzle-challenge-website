@@ -4,5 +4,38 @@
 
       ${h.markdown(puzzle.solution)}
 
+      <h2>Answers Graded As Correct</h2>
+      
+      <ul>
+        <li py:for="a in correct_answers" py:content="a.text" />
+      </ul>
+
+      <py:if test="submission">
+        <h2>Your Answer</h2>
+
+<?python
+panel_color = {
+'correct': 'success',
+'unknown': 'warning',
+'incorrect': 'danger'
+}[submission.answer.grade.name]
+
+panel_title = {
+'correct': '<i class="fa fa-check"></i> Correct',
+'incorrect': '<i class="fa fa-times"></i> Incorrect',
+'unknown': '<i class="fa fa-exclamation-triangle"></i> Grading in Progress'
+}[submission.answer.grade.name]
+?>
+
+        <div class="panel panel-${panel_color}">
+          <div class="panel-heading">
+            <h3 class="panel-title">${Markup(panel_title)}</h3>
+          </div>
+          <div class="panel-body">
+            <p>Answer Text: "${submission.answer.text}"</p>
+            <p>Submitted: ${h.ftime(submission.time)} (${submission.minutes} minutes)</p>
+          </div>
+        </div>
+      </py:if>
     </body>
 </html>

@@ -90,6 +90,10 @@ class Submission(DeclarativeBase):
     answer_id = Column(Integer, ForeignKey("answers.id"), nullable=False)
     answer = relationship("Answer", back_populates="submissions")
 
+    @property
+    def minutes(self):
+        return int((self.time - self.answer.puzzle.competition.open_time).total_seconds() // 60)
+
 class Answer(DeclarativeBase):
     __tablename__ = 'answers'
 
