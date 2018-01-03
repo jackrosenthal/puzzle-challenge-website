@@ -125,9 +125,6 @@ templating.mako.compiled_templates_dir = %(here)s/data/templates
 # Use a local file system path
 depot.storage_path = /tmp/depot
 
-# Optional Google Analytics
-# googleanalytics.id = 
-
 [loggers]
 keys = root, puzzlesweb, sqlalchemy, auth
 
