@@ -40,7 +40,7 @@ class CompetitonsController(BaseController):
         competition = DBSession.query(Competition)\
                             .filter(Competition.id == competition_id)\
                             .one()
-        
+
         # This might change if we are an admin and it's a preview
         page = 'competitions'
 
@@ -113,5 +113,5 @@ class CompetitonsController(BaseController):
                 )
             )
             last_user = u
-        
+
         return dict(page=page, competition=competition, rows=rows, full_width=True)
