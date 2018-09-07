@@ -59,6 +59,8 @@ def init_model(engine):
 
 # Import your model modules here.
 from puzzlesweb.model.auth import User, Group, Permission
-from puzzlesweb.model.puzzlecomp import Competition, Puzzle, Answer, Submission
+from puzzlesweb.model.puzzlecomp import (Competition, Puzzle, Answer,
+                                         Submission, AnswerGrade)
 
-__all__ = ('User', 'Group', 'Permission', 'Competition', 'Puzzle', 'Answer', 'Submission')
+__all__ = ('User', 'Group', 'Permission', 'Competition', 'Puzzle', 'Answer',
+           'Submission', 'AnswerGrade')
