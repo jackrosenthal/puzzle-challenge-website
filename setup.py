@@ -47,6 +47,7 @@ install_requires = [
     "Babel",
     "filedepot",
     "markdown",
+    "requests",
 ]
 
 setup(
